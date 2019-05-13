@@ -1,8 +1,8 @@
 # strangerLights
-An Arduino-Python interface for controlling a set of 26 LEDs above different letters on a wall
+An Arduino-Python interface for controlling a set of 26 LEDs above different letters on a wall.
 
 ### Dependencies
-The Python control script requires pyserial
+The Python control script requires pyserial.
 
 ### Setting up
 This requires quite a lot of wire, about £20 worth. Each LED needs to be connected (with a resistor) to one of the digital i/o pins from 22 to 48 on the Arduino, where 22 is "a", 23 is "b" and so on. A reccomended setup is to have a Raspberry Pi connected which has SSH capabilities, that way you can use your phone to change the lights.
