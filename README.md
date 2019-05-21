@@ -66,7 +66,7 @@ Be sure to add a space at the end if you want there to be a break before looping
 
 ### Spotify Integration
 
-To enable Spotify integration you need to enter you client secret and username in the control.py script (at the top). Then run the script, which will make you enter a Spotify authorising link into your browser, and will require you paste in the resulting url back into the running script. Then use the following command to enable/disable Spotify current track syncing:
+To enable Spotify integration you need to enter you client secret and username in the control.py script (at the top). Then run the following command in the script, which will make you enter a Spotify authorising link into your browser, and will require you paste in the resulting url back into the running script.
 ```
 #spot
 ```

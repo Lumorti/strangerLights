@@ -37,15 +37,19 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 
 		global currentSongName
 		global token
+		global sp
 
 		while True:
 
 			if useSpotify:
 
+				token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri)
+				sp = spotipy.Spotify(auth=token)			
+
 				obj = None
 				try:
 					obj = sp.currently_playing()
-				except e as Exception:
+				except:
 					pass
 
 				if obj is not None:
@@ -61,8 +65,6 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 						currentSongName = name
 						sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
 						sio.flush() 
-
-				token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri)
 
 			time.sleep(1)
 
