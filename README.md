@@ -47,13 +47,13 @@ This preset can then be accessed using a ".1", such that the following becomes "
 this is a .1
 ```
 
-By default there are a maximum of 10 presets, where the last 5 have preset patterns:
+By default there are a maximum of 9 presets, where the last 5 have preset patterns:
 
-6) half on and half off, then vice versa
-7) the light bounces from the top left corner, like the DVD logo
-8) a vertical line moving from the right to the left and looping
-9) Tetris
-10) a sine wave travelling to the right
+5) half on and half off, then vice versa
+6) the light bounces from the top left corner, like the DVD logo
+7) a vertical line moving from the right to the left and looping
+8) Tetris
+9) a sine wave travelling to the right
 
 You can change the oN and ofF timers in milliseconds by using:
 ```

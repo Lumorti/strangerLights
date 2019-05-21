@@ -38,31 +38,25 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 		global currentSongName
 		global token
 
-		count = 0
-
 		while True:
 
 			if useSpotify:
 
-				track = sp.currently_playing()["item"]
-				uri = track["uri"]
-				name = track["name"]
-				features = sp.audio_features([uri])
-				tempo = features[0]["tempo"]
+				obj = sp.currently_playing()
+				if obj is not None:
 
-				if name != currentSongName:
+					track = obj["item"]
+					uri = track["uri"]
+					name = track["name"]
+					features = sp.audio_features([uri])
+					tempo = features[0]["tempo"]
 
-					currentSongName = name
-					sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
-					sio.flush() 
+					if name != currentSongName:
 
-				if count > 1800:
+						currentSongName = name
+						sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
+						sio.flush() 
 
-					print("Refreshing token")
-					token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri)
-					count = 0
-
-			count += 1
 			time.sleep(1)
 
 	threading.Thread(target=readLoop).start()
