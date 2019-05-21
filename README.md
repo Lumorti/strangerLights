@@ -1,14 +1,15 @@
 # strangerLights
-An Arduino-Python interface for controlling a set of 26 LEDs above different letters on a wall.
+An Arduino-Python interface for controlling a set of 26 LEDs above different letters on a wall (much like the ones from the first season of Stranger Things).
 
 Features:
  - can do words or patterns
  - can set presets to quickly swap between patterns
  - comes with 5 preset patterns, including a Tetris sequence and a bouncing light
- - can change how long the LEDs spend on/off
+ - can manually change how long the LEDs spend on/off
+ - Spotify integration, will sync light changes with your currently playing song
 
 ### Dependencies
-The Python control script requires pyserial.
+The Python control script requires pyserial. It also requires the latest version of spotipy if Spotify integration is wanted.
 
 ### Setting up
 This requires quite a lot of wire, about £20 worth. Each LED needs to be connected (with a resistor) to one of the digital i/o pins from 22 to 48 on the Arduino, where 22 is "a", 23 is "b" and so on. A recommended setup is to have a Raspberry Pi connected which has SSH capabilities, that way you can use your phone to change the lights.
@@ -51,7 +52,7 @@ By default there are a maximum of 10 presets, where the last 5 have preset patte
 6) half on and half off, then vice versa
 7) the light bounces from the top left corner, like the DVD logo
 8) a vertical line moving from the right to the left and looping
-9) tetris
+9) Tetris
 10) a sine wave travelling to the right
 
 You can change the oN and ofF timers in milliseconds by using:
@@ -61,3 +62,11 @@ You can change the oN and ofF timers in milliseconds by using:
 ```
 
 Be sure to add a space at the end if you want there to be a break before looping. Sometimes this won't be needed, especially if doing a pattern rather than a word.
+
+
+### Spotify Integration
+
+To enable Spotify integration you need to enter you client secret and username in the control.py script (at the top). Then run the script, which will make you enter a Spotify authorising link into your browser, and will require you paste in the resulting url back into the running script. Then use the following command to enable/disable Spotify current track syncing:
+```
+#spot
+```

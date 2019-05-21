@@ -142,8 +142,25 @@ void processMessage(String message){
 			savedMessages[index-1] = message.substring(3, message.length());
 			Serial.println("Preset " + String(index) + " is now: " + savedMessages[index-1]);
 
+		} else if (message[1] == 'b'){
+
+			float bpm = message.substring(2, message.length()).toInt();
+			Serial.println("Setting to " + String(int(bpm)) + " bpm");
+			offTime = int(1000*(60.0/bpm))-onTime;
+			
+			if (offTime <= 5){
+
+				onTime = 200;
+				Serial.println("On delay is now " + String(onTime) + " ms");
+				offTime = int(1000*(60.0/bpm))-onTime;
+
+			}
+			
+			Serial.println("Off delay is now " + String(offTime) + " ms");
+
 		} else if (message[1] == 'r'){
 
+			Serial.println(F("Resetting on and off times"));
 			onTime = 1000;
 			offTime = 100;
 
