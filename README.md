@@ -4,6 +4,7 @@ An Arduino-Python interface for controlling a set of 26 LEDs above different let
 Features:
  - can do words or patterns
  - can set presets to quickly swap between patterns
+ - comes with 5 preset patterns, including a Tetris sequence and a bouncing light
  - can change how long the LEDs spend on/off
 
 ### Dependencies
@@ -35,14 +36,6 @@ The comma is used to add an extra letter to that display section, can be chained
 a,c,e,g,i,k,m,o,q,s,u,w,yb,d,f,h,j,l,n,p,r,t,v,x,z
 ```
 
-Be sure to add a space at the end if you want there to be a break before looping. Sometimes this won't be needed, especially if doing a pattern rather than a word.
-
-You can change the oN and ofF timers in milliseconds by using:
-```
-#n1000
-#f100
-```
-
 Presets can set using the "#p" command, such that the following will set preset 1 to be the words "preset test":
 ```
 #p1preset test
@@ -60,3 +53,11 @@ By default there are a maximum of 10 presets, where the last 5 have preset patte
 8) a vertical line moving from the right to the left and looping
 9) tetris
 10) a sine wave travelling to the right
+
+You can change the oN and ofF timers in milliseconds by using:
+```
+#n1000
+#f100
+```
+
+Be sure to add a space at the end if you want there to be a break before looping. Sometimes this won't be needed, especially if doing a pattern rather than a word.
