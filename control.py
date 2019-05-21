@@ -42,7 +42,12 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 
 			if useSpotify:
 
-				obj = sp.currently_playing()
+				obj = None
+				try:
+					obj = sp.currently_playing()
+				except e as Exception:
+					pass
+
 				if obj is not None:
 
 					track = obj["item"]
@@ -56,6 +61,8 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 						currentSongName = name
 						sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
 						sio.flush() 
+
+				token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri)
 
 			time.sleep(1)
 
