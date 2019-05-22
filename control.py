@@ -17,7 +17,11 @@ redirect_uri = 'http://localhost/'
 scope = 'user-read-currently-playing user-read-playback-state'
 client_id = 'ac6e3b42aaf64b44a83a48071c983f45'
 useSpotify = False
+useName = False
+hasShownName = False
 currentSongName = "";
+
+print("#spot, #name, #n1000, #f200, #p1thisispresetone, .1.1")
 
 with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 
@@ -38,6 +42,7 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 		global currentSongName
 		global token
 		global sp
+		global hasShownName
 
 		while True:
 
@@ -46,25 +51,41 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 				token = util.prompt_for_user_token(username,scope,client_id,client_secret,redirect_uri)
 				sp = spotipy.Spotify(auth=token)			
 
-				obj = None
 				try:
 					obj = sp.currently_playing()
 				except:
 					pass
 
-				if obj is not None:
+				if obj:
 
-					track = obj["item"]
-					uri = track["uri"]
-					name = track["name"]
-					features = sp.audio_features([uri])
-					tempo = features[0]["tempo"]
+					if obj is not None:
+					
+						track = obj["item"]
+						uri = track["uri"]
+						name = track["name"]
+						features = sp.audio_features([uri])
+						tempo = features[0]["tempo"]
 
-					if name != currentSongName:
+						if name != currentSongName or not hasShownName:
 
-						currentSongName = name
-						sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
-						sio.flush() 
+							hasShownName = True
+							currentSongName = name
+							sio.write(str("#b" + str(math.ceil(tempo)) + "\n"))
+
+							if useName:
+
+								name = name.replace("("," ") 
+								name = name.replace(")"," ") 
+								name = name.replace("-"," ") 
+								name = name.replace("."," ") 
+								name = name.replace("'"," ") 
+								name = name.replace("$"," ") 
+								name = name.replace("!"," ") 
+								name = name.replace("?"," ") 
+								name = name.replace("  "," ") 
+								sio.write(str(name.lower()) + " \n")
+
+							sio.flush() 
 
 			time.sleep(1)
 
@@ -94,7 +115,21 @@ with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
 
 			else: 
 
+				print("Disabling Spotify integration")
 				useSpotify = False
+
+		elif userInput == "#name":
+
+			if not useName: 
+				
+				useName = True
+				print("Name flashing now enabled")
+				hasShownName = False
+
+			else: 
+				
+				useName = False
+				print("Name flashing now disabled")
 
 		else:
 			
