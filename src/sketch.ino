@@ -32,7 +32,7 @@ void setup(){
 	savedMessages[5] = "akumeoyqgowmcksi"; // bouncing
 	savedMessages[6] = "i,ra,j,sb,k,tc,l,ud,m,ve,n,wf,o,xg,p,yh,q,z"; //moving line
 	savedMessages[7] = "a,b,c,lb,c,d,mc,d,e,nd,e,f,oe,f,g,pf,g,h,qs,t,k,u,f,g,h,qt,u,v,l,f,g,h,qu,v,w,m,f,g,h,qv,w,x,n,f,g,h,qw,x,y,o,f,g,h,qx,y,z,p,f,g,h,qh,za,j,s,k,h,zb,k,t,l,h,zc,l,u,m,h,zd,m,v,n,h,ze,n,w,o,h,zf,o,x,p,h,zg,p,y,h,q,z "; //tetris
-	savedMessages[8] = "i,a,k,u,m,e,o,y,q r,j,b,l,v,n,f,p,z i,s,k,c,m,w,o,g,q j,t,l,d,n,x,p,h"; // sine wave
+	savedMessages[8] = "i,a,k,u,m,e,o,y,qr,j,b,l,v,n,f,p,zi,s,k,c,m,w,o,g,qj,t,l,d,n,x,p,h"; // sine wave
 
 }
 
@@ -103,13 +103,16 @@ void loop(){
 
 void processMessage(String message){
 
+	Serial.println("Message before: " + message);
 	int j = 0;
 	int index = 0;	
 	while (j < message.length()){
 
 		if (message[j] == '.'){
 
-			index = message.substring(j+1, 1).toInt();
+			index = message.substring(j+1, j+2).toInt();
+			Serial.println(index);
+
 			if (j > 0){message = message.substring(0, j) + savedMessages[index-1] + message.substring(j+2, message.length());}
 			else if (j < message.length()-2){message = savedMessages[index-1] + message.substring(j+2, message.length());}
 			else {message = savedMessages[index-1] + message.substring(j+2, message.length());}

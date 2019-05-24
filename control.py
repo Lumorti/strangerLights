@@ -12,7 +12,7 @@ username = ""
 client_secret = "" 
 
 
-
+port = "/dev/ttyACM0"
 redirect_uri = 'http://localhost/'
 scope = 'user-read-currently-playing user-read-playback-state'
 client_id = 'ac6e3b42aaf64b44a83a48071c983f45'
@@ -23,7 +23,7 @@ currentSongName = "";
 
 print("#spot, #name, #n1000, #f200, #p1thisispresetone, .1.1")
 
-with serial.serial_for_url('/dev/ttyACM0', timeout=1) as ser:
+with serial.serial_for_url(port, timeout=1) as ser:
 
 	sio = io.TextIOWrapper(io.BufferedRWPair(ser, ser))
 
