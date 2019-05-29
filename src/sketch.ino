@@ -165,7 +165,7 @@ void processMessage(String message){
 
 			Serial.println(F("Resetting on and off times"));
 			onTime = 1000;
-			offTime = 100;
+			offTime = 200;
 
 		} 
  
