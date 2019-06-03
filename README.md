@@ -6,21 +6,26 @@ Features:
  - can set presets to quickly swap between patterns
  - comes with 5 preset patterns, including a Tetris sequence and a bouncing light
  - can manually change how long the LEDs spend on/off
- - Spotify integration, will sync light changes with your currently playing song
+ - can sync light changes with your currently playing song (Spotify integration)
+ - can repeatedly spell out the name of the currently playing song (Spotify integration)
+
+![Photo of Setup](https://github.com/lumorti/strangerLights/raw/master/image.jpg)
 
 ### Dependencies
-The Python control script requires pyserial. It also requires the latest version of spotipy if Spotify integration is wanted.
+The Python control script requires pyserial. It also requires the latest version of spotipy if Spotify integration is desired.
 
 ### Setting up
 This requires quite a lot of wire, about £20 worth. Each LED needs to be connected (with a resistor) to one of the digital i/o pins from 22 to 48 on the Arduino, where 22 is "a", 23 is "b" and so on. A recommended setup is to have a Raspberry Pi connected which has SSH capabilities, that way you can use your phone to change the lights.
 
 ### Installing
- - flash the Arduino firmware to an Arduino Mega (Mega because it has more digital i/o pins and flash memory for storing patterns)
+ - flash the Arduino firmware to an Arduino Mega (Mega because it has more digital i/o pins and larger flash memory for storing patterns)
  - connect a device with Python installed to the serial port of the Arduino
  - run the Python script
 
+ Note that you may need to manually change the serial port at the top of the control.py code.
+
 ### Usage
-The control script accepts single line commands once ran.
+The control script accepts single line commands once running.
 
 The following will cause the LEDs to flash the word testing:
 ```
@@ -69,4 +74,9 @@ Be sure to add a space at the end if you want there to be a break before looping
 To enable Spotify integration you need to enter you client secret and username in the control.py script (at the top). Then run the following command in the script, which will make you enter a Spotify authorising link into your browser, and will require you paste in the resulting url back into the running script.
 ```
 #spot
+```
+
+Using the following command will begin to continuously spell out the name of the currently playing song on Spotify:
+```
+#name
 ```
