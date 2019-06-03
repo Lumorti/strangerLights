@@ -29,7 +29,7 @@ void setup(){
 	savedMessages[3] = "";
 	
 	savedMessages[4] = "a,c,e,g,i,k,m,o,q,s,u,w,yb,d,f,h,j,l,n,p,r,t,v,x,z"; //half on
-	savedMessages[5] = "akumeoyqgowmcksi"; // bouncing
+	savedMessages[5] = "mc,d,e,l,n,u,v,wb,k,t,f,o,xa,j,s,g,p,yh,q,z,i,r"; // bouncing
 	savedMessages[6] = "i,ra,j,sb,k,tc,l,ud,m,ve,n,wf,o,xg,p,yh,q,z"; //moving line
 	savedMessages[7] = "a,b,c,lb,c,d,mc,d,e,nd,e,f,oe,f,g,pf,g,h,qs,t,k,u,f,g,h,qt,u,v,l,f,g,h,qu,v,w,m,f,g,h,qv,w,x,n,f,g,h,qw,x,y,o,f,g,h,qx,y,z,p,f,g,h,qh,za,j,s,k,h,zb,k,t,l,h,zc,l,u,m,h,zd,m,v,n,h,ze,n,w,o,h,zf,o,x,p,h,zg,p,y,h,q,z "; //tetris
 	savedMessages[8] = "i,a,k,u,m,e,o,y,qr,j,b,l,v,n,f,p,zi,s,k,c,m,w,o,g,qj,t,l,d,n,x,p,h"; // sine wave
@@ -41,8 +41,6 @@ void loop(){
 	if (Serial.available() > 0) {
 		
 		charBuffer = Serial.read();
-		//Serial.print("I received char code: ");
-		//Serial.println(int(charBuffer));
 
 		if (charBuffer == 10) {
 
@@ -143,7 +141,7 @@ void processMessage(String message){
 		
 			int index = message.substring(2,1).toInt();	
 			savedMessages[index-1] = message.substring(3, message.length());
-			Serial.println("Preset " + String(index) + " is now: " + savedMessages[index-1]);
+			Serial.println("Preset " + String(index-1) + " is now: " + savedMessages[index-1]);
 
 		} else if (message[1] == 'b'){
 
